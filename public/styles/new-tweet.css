@@ -1,0 +1,28 @@
+
+.content-flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.new-tweet{
+    background: #EEEEEE;
+    border: 1px solid #D4D4D4;
+    border-radius: 6px;
+    padding:0 15px 15px;
+    box-shadow: 0px 1px #D4D4D4
+}
+.new-tweet h2{
+    border-bottom: 1px solid black;
+}
+.new-tweet [type="submit"]{
+margin-top: 4px;
+}
+.new-tweet textarea{
+    min-height: 50px;
+
+}
+.new-tweet .bottom-tweet{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;   
+}
