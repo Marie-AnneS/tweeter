@@ -19,8 +19,9 @@
   <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
   <!-- App JS -->
-<!--   <script type="text/javascript" src="/scripts/ajax.js"></script>
- -->  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!--   <script type="text/javascript" src="/scripts/ajax.js"></script>
+ -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   <script type="text/javascript" src="/scripts/new-tweet.js"></script>
 
@@ -29,8 +30,13 @@
 <body>
   <!-- Top nav bar (fixed) -->
   <nav id="nav-bar">
-    <img class="logo" src="/images/bird.png">
-    <span class="header">Tweeter</span>
+    <div>
+      <img class="logo" src="/images/bird.png">
+      <span class="header">Tweeter</span>
+    </div>
+    <button id="btnCompose">
+      Compose
+    </button>
   </nav>
 
   <!-- Page-specific (main) content here -->
@@ -45,7 +51,9 @@
         </div>
       </form>
     </section>
-    <div id="tweets-container"><!-- tweets icite --></div>
+    <div id="tweets-container">
+      <!-- tweets icite -->
+    </div>
   </main>
 
   <!--   <script src="./js/app.js"></script>

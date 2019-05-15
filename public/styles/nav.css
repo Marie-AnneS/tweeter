@@ -3,16 +3,30 @@
   background: #00a087;
   color: #e8fdff;
   display: flex;
-  height: 80px;
   padding: 0 2em;
   position: fixed;
   top: 0;
   width: 100vw;
+  justify-content: space-between;
 }
 #nav-bar .logo {
-    width: 80px;
-    height: 80px;
+  width: 80px;
+  height: 80px;
 }
 #nav-bar .header {
   font-size: 2em;
+}
+#nav-bar button {
+  background: #E7FDFF;
+  border-radius: 6px;
+  color: #229385;
+  font-size: 20px;
+  margin: 16px;
+  padding: 20px;
+}
+
+#nav-bar button:hover{
+  background: #fff;
+  color: #000;
+  cursor: -webkit-grab; cursor: grab;
 }

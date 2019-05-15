@@ -3,7 +3,6 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-const ROOT_URL = "./tweet";
 // Test / driver code (temporary). Eventually will get this from the server.
 /* const data = [
   {
@@ -58,16 +57,17 @@ const ROOT_URL = "./tweet";
 function renderTweets(data) {
   for (const tweet of data) {
     var $tweet = createTweetElement(tweet);
-    console.log(tweet.user.name);
+    //console.log(tweet.user.name);
     $("#tweets-container").append($tweet);
   }
 }
 
 function loadTweets() {
   $.ajax("/tweets", { method: "GET" }).then(function(theTweets) {
-    console.log(renderTweets(theTweets));
+    console.log(renderTweets(theTweets.reverse()));
   });
 }
+
 function createTweetElement(tweet) {
   let $tweet = $("<article>").addClass("tweet");
   const $header = $("<header>");
@@ -82,24 +82,25 @@ function createTweetElement(tweet) {
     .text(tweet.content.text)
     .addClass("content-tweet");
   const $headerSide = $("<aside>").text(tweet.user.handle);
-  const $footer = $("<footer>").text(tweet.created_at);
+  const $footer = $("<footer>").text(new Date(tweet.created_at));
 
   $div.append($img, $pName);
   $header.append($div, $headerSide);
   $tweet.append($header, $pcont, $footer);
   return $tweet;
 }
-
-var $button = $("#load-more-posts");
-$button.on("click", function() {
-  console.log("Button clicked, performing ajax call...");
-  $.ajax("more-posts.html", { method: "GET" }).then(function(morePostsHtml) {
-    console.log("Success: ", morePostsHtml);
-    $button.replaceWith(morePostsHtml);
+//@@@ voir comment mettre fans une fonction
+/* function buttonToggle() {
+  $("#btnCompose").click(function() {
+    $("section .new-tweet").toggle();
   });
-});
+} */
 
 $(document).ready(() => {
-  //renderTweets(loadTweets());
+  $("button").click(function(e){
+    $("section").slideToggle(500, "linear");
+    preventDefault(e);
+    $(".new-tweet form textarea").focus();
+  });
   loadTweets();
 });
