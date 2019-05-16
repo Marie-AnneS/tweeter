@@ -31,6 +31,9 @@ margin: 0 auto;
 section{
   display: none;
 }
+#error{
+  color: rgb(201, 36, 36);
+}
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions

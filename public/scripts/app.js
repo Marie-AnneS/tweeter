@@ -3,72 +3,9 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-// Test / driver code (temporary). Eventually will get this from the server.
-/* const data = [
-  {
-    user: {
-      name: "Newton",
-      avatars: {
-        small: "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        regular: "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        large: "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      handle: "@SirIsaac"
-    },
-    content: {
-      text:
-        "If I have seen further it is by standing on the shoulders of giants"
-    },
-    created_at: 1461116232227
-  },
-  {
-    user: {
-      name: "Descartes",
-      avatars: {
-        small: "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        regular: "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        large: "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      handle: "@rd"
-    },
-    content: {
-      text: "Je pense , donc je suis"
-    },
-    created_at: 1461113959088
-  },
-  {
-    user: {
-      name: "Johann von Goethe",
-      avatars: {
-        small: "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        regular: "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        large: "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      handle: "@johann49"
-    },
-    content: {
-      text: "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    created_at: 1461113796368
-  }
-];
- */
-
-function renderTweets(data) {
-  for (const tweet of data) {
-    var $tweet = createTweetElement(tweet);
-    //console.log(tweet.user.name);
-    $("#tweets-container").append($tweet);
-  }
-}
-
-function loadTweets() {
-  $.ajax("/tweets", { method: "GET" }).then(function(theTweets) {
-    console.log(renderTweets(theTweets.reverse()));
-  });
-}
 
 function createTweetElement(tweet) {
+  /* Article */
   let $tweet = $("<article>").addClass("tweet");
   const $header = $("<header>");
   const $div = $("<div>");
@@ -89,6 +26,79 @@ function createTweetElement(tweet) {
   $tweet.append($header, $pcont, $footer);
   return $tweet;
 }
+//@@@ REFACTO TOUTE A SECTION RENDER ET LOADTWEETS
+function renderNewTweet(tweet) {
+  var $tweet = createTweetElement(tweet);
+  $("#tweets-container").prepend($tweet);
+}
+
+function renderTweets(data) {
+  for (const tweet of data) {
+    var $tweet = createTweetElement(tweet);
+    //console.log(tweet.user.name);
+    $("#tweets-container").append($tweet);
+  }
+}
+const loadTweets = onlyLast => {
+  if (onlyLast) {
+    console.log(onlyLast);
+    $.ajax("/tweets", { method: "GET" }).then(function(theTweets) {
+      renderTweets(theTweets.reverse());
+    });
+  } else {
+    $.ajax("/tweets", { method: "GET" }).then(function(theTweets) {
+      renderNewTweet(theTweets.pop());
+    });
+  }
+};
+
+// ??? difference entre expressive et autre
+function errorMessage(text) {
+  if (text === "text=") {
+    return " YO y'a rien";
+  } else if (text.length > 140) {
+    return "140 et plus";
+  } else {
+    return true;
+  }
+}
+
+//@@@ facto with
+const alertValidation = text => {
+  if (text === "text=") {
+
+
+    alert(" YO y'a rien");
+    return false;
+  } else if (text.length > 140) {
+    alert(" 140 et plus");
+    return false;
+  } else {
+    return true;
+  }
+};
+
+$(function() {
+  $("form").on("submit", function(event) {
+    event.preventDefault();
+    let contentTweet = $(this).serialize(); //@@@ changer pour le length de textarea
+    if (alertValidation(contentTweet)) {
+      $.ajax({
+        url: "/tweets",
+        method: "POST",
+        data: $(this).serialize()
+      }).done(response => {
+        // Creating and adding all the posts to the page
+        console.log("CA MARCHE!"); //@@@ remove
+        loadTweets(false);
+      });
+    }
+    $("#error").append(errorMessage(contentTweet));
+    
+    //location.reload(); //reload @@@ voir si c'est le bon truc
+  });
+});
+
 //@@@ voir comment mettre fans une fonction
 /* function buttonToggle() {
   $("#btnCompose").click(function() {
@@ -97,10 +107,10 @@ function createTweetElement(tweet) {
 } */
 
 $(document).ready(() => {
-  $("button").click(function(e){
+  loadTweets(true);
+  $("button").click(function(e) {
     $("section").slideToggle(500, "linear");
     preventDefault(e);
     $(".new-tweet form textarea").focus();
   });
-  loadTweets();
 });
