@@ -19,7 +19,7 @@ function createTweetElement(tweet) {
     .text(tweet.content.text)
     .addClass("content-tweet");
   const $headerSide = $("<aside>").text(tweet.user.handle);
-  const $footer = $("<footer>").text(`${moment(new Date(tweet.created_at), "DD").fromNow()}`); //new Date(tweet.created_at).getDate()
+  const $footer = $("<footer>").text(`${moment(new Date(tweet.created_at), "DD").fromNow()}`);
   const $divIcon = $("<div>").html('<i class="fas fa-flag"></i><i class="fas fa-retweet"></i><i class="fas fa-heart"></i>');
   
   $footer.append($divIcon);
