@@ -21,11 +21,6 @@ MongoClient.connect(MONGODB_URI, (err, mongoDb) => {
   // We have a connection to the "tweeter" db, starting here.
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
   db = mongoDb;
-  console.log("patata", db);
-
-  // ==> Later it can be invoked. Remember even if you pass
-  //     `getTweets` to another scope, it still has closure over
-  //     `db`, so it will still work. Yay!
 
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(express.static("public"));

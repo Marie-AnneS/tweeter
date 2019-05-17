@@ -3,7 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
-
+//  create html tag with JQuery
 function createTweetElement(tweet) {
   /* Article */
   let $tweet = $("<article>").addClass("tweet");
@@ -15,11 +15,11 @@ function createTweetElement(tweet) {
   const $pName = $("<p>")
     .text(tweet.user.name)
     .addClass("name");
-  const $pcont = $("<p>")  /* @@@ voir pou rle body */
+  const $pcont = $("<p>")
     .text(tweet.content.text)
     .addClass("content-tweet");
   const $headerSide = $("<aside>").text(tweet.user.handle);
-  const $footer = $("<footer>").text(new Date(tweet.created_at).toDateString()); //.getDate()
+  const $footer = $("<footer>").html("<script>moment('01/12/2016', 'DD/MM/YYYY', true).format()</script>"); //new Date(tweet.created_at).getDate()
   const $divIcon = $("<div>").html('<i class="fas fa-flag"></i><i class="fas fa-retweet"></i><i class="fas fa-heart"></i>');
   
   $footer.append($divIcon);
@@ -28,8 +28,6 @@ function createTweetElement(tweet) {
   $tweet.append($header, $pcont, $footer);
   return $tweet;
 }
-
-//@@@ REFACTO TOUTE A SECTION RENDER ET LOADTWEETS
 
 function renderTweets(data) {
   for (const tweet of data) {
@@ -53,14 +51,6 @@ function errorMessage(nb) {
     return false;
   }
 }
-//@@@function pour appelle ajax
-
-//@@@ voir comment mettre fans une fonction
-/* function buttonToggle() {
-  $("#btnCompose").click(function() {
-    $("section .new-tweet").toggle();
-  });
-} */
 
 $(document).ready(() => {
   loadTweets();
@@ -77,7 +67,6 @@ $(document).ready(() => {
     $("section").removeClass("error");
     event.preventDefault();
     let lengthTweet = $(".new-tweet form textarea").val().length;
-    console.log(lengthTweet);
     if (!errorMessage(lengthTweet)) {
       $.ajax({
         url: "/tweets",
@@ -94,7 +83,6 @@ $(document).ready(() => {
       $(".new-tweet form textarea").focus(function(){
         $("#error").empty();
         $("section").removeClass("error");
-
       });
     }
   });
