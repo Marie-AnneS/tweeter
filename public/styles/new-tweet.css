@@ -1,12 +1,7 @@
-.content-flex-col {
-  display: flex;
-  flex-direction: column;
-} /* @@@ Voir si je garde une class generique flex */
-
-
 /* tweet box ARTICLE*/
 .new-tweet {
   background: #eeeeee;
+  box-shadow: 0px 3px 9px #808080;
   padding: 15px 15px;
 }
 
@@ -17,15 +12,19 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+
 .new-tweet h2 {
   border-bottom: 1px solid black;
 }
+
 .new-tweet [type="submit"] {
   margin-top: 4px;
 }
+
 .new-tweet textarea {
   min-height: 50px;
 }
+
 .new-tweet .bottom-tweet {
   display: flex;
   justify-content: space-between;
@@ -36,20 +35,22 @@
   color: #33545e;
   font-style: italic;
 }
+
 .new-tweet .counter .red {
   color: red;
 }
 
 /* Tweet box SECTION*/
 .tweet header {
-  display: flex;
+  align-items: flex-start;
   background: #f3f3f3;
-  padding: 15px;
+  display: flex;
   justify-content: space-between;
-  align-items: center;
+  padding: 15px;
 }
 .tweet header div {
   display: flex;
+  align-items: flex-start;
 }
 
 .tweet p.name {
@@ -58,19 +59,45 @@
   font-size: 2em;
   color: #657c82;
 }
+
 .tweet img {
+  border-radius: 6px;
   max-width: 50px;
   max-height: 50px;
-  border-radius: 6px;
 }
+
 .tweet .content-tweet {
   min-height: 60px;
   display: flex;
   align-items: center;
   padding: 0 20px;
 }
+
 .tweet footer {
-  padding: 10px;
+  align-content: center;
   border-top: 1px solid #657c82;
+  display: flex;
+  justify-content: space-between;
   font-size: 0.8em;
+  padding: 10px;
 }
+
+.tweet aside {
+  padding-top: 9px;
+}
+
+.tweet i {
+  display: none;
+}
+
+article.tweet:hover i {
+  color: #11d1b8;
+  display: block;
+}
+
+.content-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+

@@ -17,7 +17,8 @@ html {
  */
 
 body {
-  background-color: #eee;
+  background-color: #effffd;
+
   color: #244751;
   font-family: "Roboto Condensed", sans-serif;
   margin: 0 auto;
@@ -29,6 +30,7 @@ nav{
 
 main {
   background: #fff;
+  box-shadow: 4px 2px 19px #d4d4d4;
   min-height: 100vh;
   margin: 0 auto;
   padding: 120px 40px;
@@ -59,14 +61,13 @@ article:hover {
 p {
   word-break: break-word;
 }
+
+i{
+  padding: 0 4px;
+}
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 #error {
   color: rgb(201, 36, 36);
-}
-
-#nav-bar div{
-  display: flex;
-  align-items: center;
 }

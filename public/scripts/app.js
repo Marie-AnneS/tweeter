@@ -19,22 +19,21 @@ function createTweetElement(tweet) {
     .text(tweet.content.text)
     .addClass("content-tweet");
   const $headerSide = $("<aside>").text(tweet.user.handle);
-  const $footer = $("<footer>").text(new Date(tweet.created_at));
-
+  const $footer = $("<footer>").text(new Date(tweet.created_at).toDateString()); //.getDate()
+  const $divIcon = $("<div>").html('<i class="fas fa-flag"></i><i class="fas fa-retweet"></i><i class="fas fa-heart"></i>');
+  
+  $footer.append($divIcon);
   $div.append($img, $pName);
   $header.append($div, $headerSide);
   $tweet.append($header, $pcont, $footer);
   return $tweet;
 }
 
-/* @@@ oublier de mettre les flag */
-
 //@@@ REFACTO TOUTE A SECTION RENDER ET LOADTWEETS
 
 function renderTweets(data) {
   for (const tweet of data) {
     var $tweet = createTweetElement(tweet);
-    //console.log(tweet.user.name);
     $("#tweets-container").prepend($tweet);
   }
 }
@@ -45,7 +44,6 @@ const loadTweets = () => {
   });
 };
 
-// ??? difference entre expressive et autre
 function errorMessage(nb) {
   if (nb === 0) {
     return " ❎ the tweet area is empty";
@@ -55,20 +53,7 @@ function errorMessage(nb) {
     return false;
   }
 }
-
-//@@@ facto with
-/* const alertValidation = nb => {
-  if (nb === 0) {
-    //alert(" YO y'a rien");
-    return false;
-  } else if (nb > 140) {
-    alert(" 140 et plus");
-    return false;
-  } else {
-    return true;
-  } 
-};*/
-//!!!function pour appelle ajax
+//@@@function pour appelle ajax
 
 //@@@ voir comment mettre fans une fonction
 /* function buttonToggle() {
@@ -100,11 +85,10 @@ $(document).ready(() => {
         data: $(this).serialize()
       }).done(response => {
         // Creating and adding all the posts to the page
-        console.log(response); //@@@ remove
         renderTweets([response]);
         $(".new-tweet form textarea").val('');
       });
-    } else {
+    } else { 
       $("#error").append(errorMessage(lengthTweet));
       $("section").addClass("error");
       $(".new-tweet form textarea").focus(function(){
@@ -113,6 +97,5 @@ $(document).ready(() => {
 
       });
     }
-    //location.reload(); //reload @@@ voir si c'est le bon truc
   });
 });
