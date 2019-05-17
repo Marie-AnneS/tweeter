@@ -1,6 +1,6 @@
 "use strict";
 
-const {MongoClient} = require("mongodb");
+const { MongoClient } = require("mongodb");
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
@@ -15,9 +15,13 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // ==> Refactored and wrapped as new, tweet-specific function:
 
   function getTweets(callback) {
-    db.collection("tweets").find().toArray(callback);
+    db.collection("tweeter")
+      .find()
+      .toArray(callback);
   }
+  ///Promissess
 
+  
   // ==> Later it can be invoked. Remember even if you pass
   //     `getTweets` to another scope, it still has closure over
   //     `db`, so it will still work. Yay!
@@ -32,5 +36,4 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
     db.close();
   });
-
 });

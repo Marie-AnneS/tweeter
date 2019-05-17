@@ -6,12 +6,35 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+const Mongo = require('mongodb');
+const MongoClient = Mongo.MongoClient;
+const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+
+let db = null;
+
+MongoClient.connect(MONGODB_URI, (err, mongoDb) => {
+  if (err) {
+    console.log('Cannot connect to MongoDB:', err);
+    process.exit(1);
+  }
+  // We have a connection to the "tweeter" db, starting here.
+  console.log(`Connected to mongodb: ${MONGODB_URI}`);
+  db = mongoDb;
+});
+
+
+  
+  // ==> Later it can be invoked. Remember even if you pass
+  //     `getTweets` to another scope, it still has closure over
+  //     `db`, so it will still work. Yay!
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // The in-memory database of tweets. It's a basic object with an array in it.
-const db = require("./lib/in-memory-db");
+db = require("./lib/in-memory-db");
 
 // The `data-helpers` module provides an interface to the database of tweets.
 // This simple interface layer has a big benefit: we could switch out the

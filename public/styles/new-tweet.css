@@ -1,20 +1,21 @@
 .content-flex-col {
   display: flex;
   flex-direction: column;
-}
-article,
-section {
-  border: 1px solid #d4d4d4;
-  border-radius: 6px;
-  box-shadow: 0px 1px #d4d4d4;
-  margin: 10px 0;
-  /* padding: 15px 15px; */
-}
+} /* @@@ Voir si je garde une class generique flex */
 
-/* New tweet box */
+
+/* tweet box ARTICLE*/
 .new-tweet {
   background: #eeeeee;
   padding: 15px 15px;
+}
+
+.new-tweet.error {
+  background: rgb(255, 224, 224);
+  border: 2px solid #da1414;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .new-tweet h2 {
   border-bottom: 1px solid black;
@@ -39,7 +40,7 @@ section {
   color: red;
 }
 
-/* Tweet box */
+/* Tweet box SECTION*/
 .tweet header {
   display: flex;
   background: #f3f3f3;

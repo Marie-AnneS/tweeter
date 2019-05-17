@@ -17,24 +17,56 @@ html {
  */
 
 body {
-  color: #244751;
   background-color: #eee;
+  color: #244751;
   font-family: "Roboto Condensed", sans-serif;
   margin: 0 auto;
 }
-main {
-  padding: 140px 40px;
-  background: #fff;
-width: 450px;
-margin: 0 auto;
-}
-section{
-  display: none;
-}
-#error{
-  color: rgb(201, 36, 36);
+
+nav{
+  z-index: 100;
 }
 
+main {
+  background: #fff;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 120px 40px;
+  max-width: 450px;
+}
+
+article,
+section {
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  box-shadow: 0px 1px #d4d4d4;
+  margin: 10px 0;
+  /* padding: 15px 15px; */
+}
+
+section {
+  display: none;
+}
+
+article {
+  opacity: 0.7;
+}
+
+article:hover {
+  opacity: 1;
+}
+
+p {
+  word-break: break-word;
+}
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+#error {
+  color: rgb(201, 36, 36);
+}
+
+#nav-bar div{
+  display: flex;
+  align-items: center;
+}

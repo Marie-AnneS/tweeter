@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".new-tweet form textarea").on("keydown", function(event) {
     //console.log(event)
-    var maxLength = 140;
+    var maxLength = 139;
     //compte le nombre de caractere
     var length = $(this).val().length;
     //console.log($(this).val())
